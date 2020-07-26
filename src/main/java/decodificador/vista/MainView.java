@@ -1,6 +1,9 @@
 package decodificador.vista;
 
+import decodificador.funcion.MainFunction;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,11 +35,18 @@ public class MainView extends JFrame {
                 String sequenceB = sequenceBText.getText();
                 String result;
 
-                if(!sequenceA.isEmpty() && !sequenceB.isEmpty()) {
+                if (!sequenceA.isEmpty() && !sequenceB.isEmpty()) {
                     //Acciones para decodificar
+                    MainFunction funcion = new MainFunction();
+                    result = funcion.decoderFunction(sequenceA, sequenceB);
 
-                    result = "RESULTADO";
-                    sequenceResult.setText(result);
+                    if (result.length() > 1) {
+                        sequenceResult.setForeground(Color.BLACK);
+                        sequenceResult.setText(result);
+                    } else {
+                        sequenceResult.setForeground(Color.RED);
+                        sequenceResult.setText("--Sin Coincidencias--");
+                    }
                 } else {
                     //System.out.println("Cadenas vacias");
                     JOptionPane.showMessageDialog(null, "Debe llenar ambos campos para poder Decodificar", "ERROR", JOptionPane.ERROR_MESSAGE);
